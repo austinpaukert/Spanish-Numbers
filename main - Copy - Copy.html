@@ -104,6 +104,7 @@
     <button onclick="openDocument('main.html')">Numbers to spanish</button>
     <button onclick="openDocument('index.html')">Spanish to numbers</button>
     <h1>Vocab</h1>
+    <h1 style="color: red; visibility: hidden; font-size: medium;" id="Hard_Difficulty">Hard</h1>
     <p id="Word-English">Type the Spanish word for the number:</p>
     <div class="input-container">
         <input type="text" id="Height" placeholder="Type The number">
@@ -122,7 +123,7 @@
             { number: 1, english: "He runs.", spanish: "Él corre." },
             { number: 2, english: "This is a book.", spanish: "Este es un libro." },
             { number: 3, english: "The boy is here.", spanish: "El muchacho está aquí." },
-            { number: 4, english: "The girl is nice.", spanish: "La muchacha es amable." },
+            { number: 4, english: "The girl is here.", spanish: "La muchacha está aquí." },
             { number: 5, english: "The boy runs.", spanish: "El muchacho corre." },
             { number: 6, english: "She has a pencil.", spanish: "Ella tiene un lápiz." },
             { number: 7, english: "The boy is Bob.", spanish: "El muchacho es Bob." },
@@ -132,14 +133,22 @@
             { number: 11, english: "The girl has a pencil.", spanish: "La muchacha tiene un lápiz." },
             { number: 12, english: "The table is big.", spanish: "La mesa es grande." },
             { number: 13, english: "The teacher is a woman.", spanish: "La maestra es una mujer." },
+            { number: 14, english: "The teacher is a man.", spanish: "el maestro es un hombre. " },
+            { number: 15, english: "The teacher is a woman. She has a pencil and paper. She writes on paper.", spanish: "La maestra es una mujer. Tiene lápiz y papel. Ella escribe en papel." }
         ];
 
     
         const hi = document.getElementById("Height");
         const Average = document.getElementById("AveragePercent");
         const randomNumberDisplay = document.getElementById("Word-English");
+        const Hard_Text = document.getElementById("Hard_Difficulty")
         let currentNumber = generateRandomNumber();
         randomNumberDisplay.textContent = currentNumber.spanish; // Display the Spanish word
+        if (currentNumber.number === 15){
+            Hard_Text.style.visibility = "visible";
+        } else{
+            Hard_Text.style.visibility = "hidden";
+        }
     
         function generateRandomNumber() {
             const randomIndex = Math.floor(Math.random() * numbers.length);
@@ -165,6 +174,11 @@
                     document.body.classList.remove('flashing-green');
                     currentNumber = generateRandomNumber();
                     randomNumberDisplay.textContent = currentNumber.spanish; // Display the new Spanish word
+                    if (currentNumber.number == 15){
+                        Hard_Text.style.visibility = "visible";
+                    } else{
+                        Hard_Text.style.visibility = "hidden";
+                    }
                     hi.value = ''; // Clear input after correct answer
                 }, 1000);
             } else {
@@ -182,6 +196,11 @@
                         currentNumber = generateRandomNumber();
                         randomNumberDisplay.textContent = currentNumber.spanish; // Display the new Spanish word
                         hi.value = ''; // Clear input after showing correct answer
+                        if (currentNumber.number == 15){
+                            Hard_Text.style.visibility = "visible";
+                        } else{
+                            Hard_Text.style.visibility = "hidden";
+                        }
                     }, 2000);
                 }
             }
